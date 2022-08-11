@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+    프로필 설정
+{% endblock %}
+
+{% block body %}
+    {% include 'includes/messages.html' %}
+    <div class="mb-3 fs-4 fw-bolder">Profile</div>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+
+        <div class="board-form">
+            <div class="form-group">
+                {{ form.nickname.label("닉네임") }}
+                {{ form.nickname(class="form-control", placeholder="닉네임") }}
+            </div>
+            <div class="form-group">
+                {{ form.message.label("간단 메시지") }}
+                {{ form.message(class="form-control", placeholder="간단 메시지") }}</div>
+            <div class="form-group">
+                {{ form.profile_image.label("프로필 이미지") }}
+                {{ form.profile_image(class="form-control", placeholder="프로필 이미지") }}
+            </div>
+            <button type="submit" class="btn btn-primary mt-2 mb-2">등록</button>
+        </div>
+    </form>
+    <div>3. request.path ::: {{ request.path.split('/')[2] }}</div>
+{% endblock %}

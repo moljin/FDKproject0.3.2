@@ -1,0 +1,138 @@
+<div class="logo-wrapper">
+    <a href="{{ url_for('commons.index') }}"><span class="logo">β-0.3.2</span></a>
+</div>
+<div class="header-empty" style="background: #0a53be;height: 55px"></div>
+<div class="navigation-wrapper">
+    <div class="site-navigation">
+        <nav id="nav">
+            <ul class="accordion">
+                <li class="c-search">
+                    <form class="c-search-form">
+                        <input type="search" class="form-input" placeholder="Search..."
+                               aria-label="Search">
+                    </form>
+                </li>
+                <li>
+                    <div class="tab tab-n1" id="tab-n1">머라도라</div>
+                    <ul class="tab-panel" id="panel-n1">
+                        <a href="#">
+                            <li>머라도... 만들기</li>
+                        </a>
+                        <a href="#">
+                            <li>머라도... 만들기</li>
+                        </a>
+                        <a href="#">
+                            <li>머라도... 만들기</li>
+                        </a>
+
+                    </ul>
+                </li>
+                <li>
+                    <div class="tab tab-n2" id="tab-n2">라도머라</div>
+                    <ul class="tab-panel" id="panel-n2">
+                        <a href="#">
+                            <li>머라도... 만들기</li>
+                        </a>
+                        <a href="#">
+                            <li>머라도... 만들기</li>
+                        </a>
+                        <a href="#">
+                            <li>머라도... 만들기</li>
+                        </a>
+                        <a href="#">
+                            <li>머라도... 만들기</li>
+                        </a>
+
+                    </ul>
+                </li>
+                <li>
+                    <div class="tab my-page" id="my-page">마이 페이지
+                        {% if current_user.is_authenticated and profile %}
+                            <div class="header-profile-img-div"><img class="header-profile-img" src="/{{ profile.image_path }}"
+                                                                     alt="mdo"></div>
+                        {% else %}
+                            <img class="user-svg" src="{{ url_for('static', filename='statics/images/user_profile.svg') }}"
+                                 alt="mdo">
+                        {% endif %}
+                    </div>
+                    <ul class="tab-panel" id="panel-my-page">
+                        {% if current_user.is_authenticated and current_user.is_admin %}
+                            <li>
+{#<!--                                <a href="{{ url_for('admin.index') }}">Admin</a>-->#}
+                                <a href="#">Admin</a>
+                            </li>
+                        {% endif %}
+                        {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('accounts.resetting', _id=current_user.id) }}">
+                                <li>
+                                    계정 설정
+                                </li>
+                            </a>
+                            <a href="{{ url_for('accounts.dashboard') }}">
+                                <li>
+                                    DashBoard
+                                </li>
+                            </a>
+                        {% endif %}
+
+                        <a href="#">
+                            <li>자바스크립트 자바스....</li>
+                        </a>
+                        <a href="#">
+                            <li>자바스크립트 자바스....</li>
+                        </a>
+                        <a href="#">
+                            <li>자바스크립트..</li>
+                        </a>
+                        <a href="#">
+                            <li style="display: flex">
+                                <img style="width: 30px; height: 30px; border-radius: 50%"
+                                     src="https://www.placecage.com/c/200/250" alt="Sample image"><br>
+                                <span style="margin-left: 1rem">머시기</span>
+                            </li>
+                        </a>
+
+                    </ul>
+                </li>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('accounts.logout') }}">
+                        <li>
+                            <div class="no-tab no-tab-n1">로그아웃</div>
+                        </li>
+                    </a>
+                    <a href="#">
+                        <li>
+                            <div class="no-tab no-tab-n4">No Tab</div>
+                        </li>
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('accounts.login') }}">
+                        <li>
+                            <div class="no-tab no-tab-n2">로그인</div>
+                        </li>
+                    </a>
+                    <a href="{{ url_for('accounts.register') }}">
+                        <li>
+                            <div class="no-tab no-tab-n3">회원가입</div>
+                        </li>
+                    </a>
+                {% endif %}
+
+            </ul>
+            <div style="display: none" class="no-tab-n1 no-tab-n2 no-tab-n3 no-tab-n4"></div>
+        </nav>
+    </div>
+</div>
+<div class="mobile-button">
+    <button class="hamburger">
+        <svg width="32" height="36">
+            <rect id="line1" y="8" width="32" height="4"/>
+            <rect id="line2" y="17" width="32" height="4"/>
+            <rect id="line3" y="26" width="32" height="4"/>
+        </svg>
+    </button>
+</div>
+
+<script src="{{ url_for('static', filename='statics/js/nav/nav.js') }}"></script>
+
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1"/>
+    <title>{% block title %}{% endblock %} | β-03</title>
+
+    <link href="{{ url_for('static', filename='statics/css/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='statics/css/nav.css') }}" rel="stylesheet">
+
+    <script src="{{ url_for('static', filename='statics/js/libs/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='statics/js/libs/popper.min.js') }}"></script>
+
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <header class="header">
+        {% include 'includes/index/header.html' %}
+    </header>
+    <div class="body-wrapper">
+        <div class="body-container">
+            {% block content %}
+            {% endblock %}
+
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+    {% block script %}
+    {% endblock %}
+
+    <footer class="footer">
+        {% include 'includes/index/footer.html' %}
+    </footer>
+<script src="{{ url_for('static', filename='statics/js/nav/slideToggle.js') }}"></script>
+</body>
+</html>

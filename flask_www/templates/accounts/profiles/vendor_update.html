@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}
+    판매자 업데이트
+{% endblock %}
+<body>
+{% block body %}
+    <h1>Vendor Update</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div class="board-form">
+            <div class="form-group">
+                {{ form.nickname.label("닉네임") }}
+                <input class="form-control" type="text" name="nickname" value="{{ getprofile.nickname }}"/>
+            </div>
+            <div class="form-group">
+                {{ form.message.label("메시지") }}
+                <textarea class="form-control message" name="message" id="message" cols="30" rows="10">{{ getprofile.message }}</textarea>
+            </div>
+
+            <div class="form-group">
+                {{ form.profile_image.label("프로필 이미지") }}
+                <img width="300px" src="/{{ getprofile.image_path }}">
+                <div><a href="http://127.0.0.1:5000/{{ getprofile.image_path }}">{{ getprofile.image_path.split('/')[-1] }}</a></div>
+                <input class="form-control" type="file" name="profile_image" value=""/>
+            </div>
+
+            <div class="form-group">
+                {{ form.corp_email.label("사업자용 이메일") }}
+                {% if getprofile.corp_email %}
+                <input class="form-control" type="text" name="corp_email" value="{{ getprofile.corp_email }}"/>
+                {% else %}
+                {{ form.corp_email(class="form-control", placeholder="사업자용 이메일") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.corp_number.label("사업자 등록번호") }}
+                {% if getprofile.corp_number %}
+                <input class="form-control" type="text" name="corp_number" value="{{ getprofile.corp_number }}"/>
+                {% else %}
+                {{ form.corp_number(class="form-control", placeholder="사업자 등록번호") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.corp_image.label("사업자 등록증") }}
+                {% if getprofile.corp_image %}
+                <img width="300px" src="/{{ getprofile.corp_image }}">
+                <input class="form-control" type="file" name="corp_image" value=""/>
+                {% else %}
+                {{ form.corp_image(class="form-control", placeholder="사업자 등록증") }}
+                {% endif %}
+
+            </div>
+            <div class="form-group">
+                {{ form.corp_address.label("사업자 주소") }}
+                {% if getprofile.corp_address %}
+                <input class="form-control" type="text" name="corp_address" value="{{ getprofile.corp_address }}"/>
+                {% else %}
+                {{ form.corp_address(class="form-control", placeholder="사업자 주소") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.main_phonenumber.label("대표 전화번호") }}
+                {% if getprofile.main_phonenumber %}
+                <input class="form-control" type="text" name="main_phonenumber" value="{{ getprofile.main_phonenumber }}"/>
+                {% else %}
+                {{ form.main_phonenumber(class="form-control", placeholder="대표 전화번호") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.main_cellphone.label("사업자 휴대폰") }}
+                {% if getprofile.main_cellphone %}
+                <input class="form-control" type="text" name="main_cellphone" value="{{ getprofile.main_cellphone }}"/>
+                {% else %}
+                {{ form.main_cellphone(class="form-control", placeholder="사업자 휴대폰") }}
+                {% endif %}
+            </div>
+            <input type="hidden" name="level" value="{{ level }}">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2 mb-2">등록</button>
+    </form>
+{% endblock %}
+</body>

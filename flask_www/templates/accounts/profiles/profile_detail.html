@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}
+    Profile Detail
+{% endblock %}
+
+
+{% block body %}
+    <h1>Profile Detail</h1>
+    {% if current_user.is_authenticated and current_user.id==profile_user.id %}
+        <div><a href="{{url_for('profiles.update', _id=profile.id)}}">{{ profile.nickname }} 수정</a></div>
+    {% endif %}
+
+    <div>{{ profile.image_path.split('/')[-1] }}</div>
+
+    {% if profile.level == '일반이용자' %}
+    <div>{{ profile.level }}</div>
+    {% endif %}
+
+    <div><a href="{{ url_for('profiles.delete', _id=profile.id) }}"><button>삭제</button></a></div>
+    <div><img width="300px" src="/{{ profile.image_path }}"></div>
+
+    <div>{{ profile.message }}</div>
+
+    {% if current_user.is_authenticated and current_user.id==profile.user_id %}
+        <div>{{ profile.nickname }} <a href="{{ url_for('profiles.vendor_update', _id=profile.id) }}">
+            {% if profile.level == '일반이용자' %}
+                vendor 신청하기
+            {% else %}
+                vendor profile 수정하기
+            {% endif %}
+        </a></div>
+    {% endif %}
+{% endblock %}

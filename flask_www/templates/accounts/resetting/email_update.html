@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+    이메일 변경
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='statics/css/signup.css') }}">
+{% endblock %}
+
+{% block body %}
+    {% include 'includes/messages.html' %}
+    <div class="section-container">
+        <div class="article-container">
+            <div class="login-register-container">
+                <div class="below-block">
+                    <h2 style="text-align: center">로그인 이메일 재설정</h2>
+                </div>
+                <div class="form-modal">
+                    <div id="signup-form">
+                        <form class="form" method="post" id="form">
+                        {{ form.csrf_token }}
+                        <p>현재 로그인에 사용하는 등록 이메일은 {{ user.email }}입니다.</p>
+                        <div class="form-group">
+                        {{ form.email.label("이메일") }}
+                        {{ form.email(class="form-control", placeholder="재설정 이메일") }}
+                    </div>
+
+                        <input type="hidden" name="pk-id" value="{{ user.id }}">
+                        <button type="submit" class="btn btn-primary mt-3">재설정 하기</button>
+                    </form>
+                   <p>이메일을 변경하면 자동 로그아웃 되고, 동시에 해당 이메일로 인증 메일이 발송되며, 인증후 다시 로그인이 필요합니다.</p>
+                    <p>스팸편지함도 확인바랍니다.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

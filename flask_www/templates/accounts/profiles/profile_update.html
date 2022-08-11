@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+    Profile Update
+{% endblock %}
+{% block head %}
+    <style>
+    .message {outline: none; resize: none; width: 100%; height: 100px}
+    </style>
+{% endblock %}
+<body>
+
+{% block body %}
+    <h1>Profile Update</h1>
+    <form method="POST" enctype="multipart/form-data">
+                        {{ form.csrf_token }}
+    <p>닉네임 <input type = "text" name = "nickname" value="{{ getprofile.nickname }}"/></p>
+{#    <p>content <input type = "text" name = "content"  value="{{ board.content }}"/></p>#}
+        <textarea class="message" name="message" id="message" cols="30" rows="10">{{ getprofile.message }}</textarea>
+        <div><img width="300px" src="/{{ getprofile.image_path }}"></div>
+        <p><a href="http://127.0.0.1:5000/{{ getprofile.image_path }}">{{ getprofile.image_path.split('/')[-1] }}</a></p>
+    <p>프로필 이미지 <input type = "file" name = "profile_image" value=""/></p>
+
+    <p><input type = "submit" value = "Submit" /></p>
+    </form>
+
+            <div>3. {{ request.path }}</div>
+{% endblock %}
+</body>

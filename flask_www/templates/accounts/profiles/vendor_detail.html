@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+    판매자 상세정보
+{% endblock %}
+<body>
+{% block body %}
+    <h>판매자 상세정보</h>
+    {% if current_user.is_authenticated and current_user.id==profile_user.id %}
+        <div><a href="{{url_for('profiles.vendor_update', _id=profile.id)}}">{{ profile.nickname }} 수정</a></div>
+    {% endif %}
+
+    <div>{{ profile.image_path.split('/')[-1] }}</div>
+
+    {% if profile.level == '심사중 판매사업자' %}
+        <div>{{ profile.level }}</div>
+    {% elif profile.level == '판매사업자' %}
+        <div>{{ profile.level }}</div>
+    {% endif %}
+
+    <div><a href="{{ url_for('profiles.delete', _id=profile.id) }}"><button>삭제</button></a></div>
+    <div><img width="300px" src="/{{ profile.image_path }}"></div>
+
+    <div>{{ profile.message }}</div>
+
+    <div>{{ profile.corp_email }}</div>
+    <div>{{ profile.corp_number }}</div>
+    <div><img width="300px" src="/{{ profile.corp_image_path }}"></div>
+    <div>{{ profile.corp_address }}</div>
+    <div>{{ profile.main_phonenumber }}</div>
+    <div>{{ profile.main_cellphone }}</div>
+{% endblock %}
+</body>

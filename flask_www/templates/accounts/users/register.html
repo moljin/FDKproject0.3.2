@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}
+    Sign Up
+{% endblock %}
+
+{% block body %}
+    {% include 'includes/messages.html' %}
+        <div class="mb-3 fs-4 fw-bolder">회원 가입</div>
+        <form method="POST">
+            {{ form.csrf_token }}
+
+            <div class="form-control">
+                <div class="form-group">
+                    {{ form.email.label("이메일") }}
+                    {{ form.email(class="form-control", placeholder="이메일") }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label("비밀번호") }}
+                    {{ form.password(class="form-control", placeholder="비밀번호") }}</div>
+                <div class="form-group">
+                    {{ form.repassword.label("비밀번호 확인") }}
+                    {{ form.repassword(class="form-control", placeholder="비밀번호 확인") }}
+                </div>
+                {{ form.submit(class="btn btn-primary mt-2 mb-2") }}
+            </div>
+
+        </form>
+        <div class="mt-2 mb-2">
+            <a href="{{ url_for('accounts.login') }}">로그인</a>
+        </div>
+{% endblock %}

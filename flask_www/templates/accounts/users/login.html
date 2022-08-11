@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+    {% include 'includes/messages.html' %}
+        <div class="mb-3 fs-4 fw-bolder">로그인</div>
+        {{ next }}
+        <form method="POST">
+            {{ form.csrf_token }}
+
+            <div class="form-control">
+                <div class="form-group">
+                    {{ form.email.label("아이디") }}
+                    {{ form.email(class="form-control", placeholder="이메일") }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label("비밀번호") }}
+                    {% if form.password.errors %}
+                        {{ form.password.errors.0 }}
+                    {% endif %}
+
+                    {{ form.password(class="form-control", placeholder="비밀번호") }}
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-2 mb-2">로그인</button>
+            </div>
+
+        </form>
+        <div class="mt-2 mb-2"><a href="{{ url_for('accounts.register') }}">아직 가입을 하지 않으셨나요?</a></div>
+        <div class="mt-2 mb-2"><a href="{{ url_for('accounts.forget_password_email') }}">비밀번호를 잊으셨나요?</a></div>
+{% endblock %}
+
