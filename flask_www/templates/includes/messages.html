@@ -1,11 +1,12 @@
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <div class="flashes">
+            <div class="flashes" uk-alert>
             {% for message in messages %}
                 <div class="alert alert-danger" role="alert">
                     {{ message }}
                 </div>
+                <button class="uk-alert-close" type="button" uk-close></button>
             {% endfor %}
             </div>
         {% endif %}

@@ -1,4 +1,6 @@
+import os
 import re
+import shutil
 
 from flask import render_template, Blueprint, session, redirect, url_for, g, flash, request
 from flask_login import logout_user, current_user, login_user
@@ -11,6 +13,7 @@ from flask_www.accounts.utils import login_required, send_mail_for_any
 from flask_www.commons.ownership_required import account_ownership_required
 from flask_www.commons.utils import flash_form_errors
 from flask_www.configs import db
+from flask_www.configs.config import BASE_DIR
 
 NAME = 'accounts'
 accounts_bp = Blueprint(NAME, __name__, url_prefix='/accounts')
@@ -129,6 +132,9 @@ def confirm_email(token):
 @accounts_bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if current_user.is_authenticated:
+        flash("로그인 상태입니다!")
+        return redirect(url_for("commons.index"))
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if not user:
@@ -297,10 +303,26 @@ def forget_password_update(_id, password_token):
 @account_ownership_required
 def delete(_id):
     if request.method == 'POST': # 이거는 꼭 없어도 된다.
-        pk_id = request.form.get('_id')
-        print('999999999999999999999999', pk_id)
-        user_obj = User.query.filter(User.id == _id)
-        user_obj.delete()
+        # _id = request.form.get('_id')
+        print('999999999999999999999999', _id)
+        # user_obj = User.query.filter(User.id == _id)
+        user_obj = db.session.query(User).filter_by(id=_id).first()
+        profile = db.session.query(Profile).filter_by(user_id=_id).first()
+        if profile:
+            try:
+                profile_image_origin_path = os.path.join(BASE_DIR, profile.image_path)
+                if os.path.isfile(profile_image_origin_path):
+                    shutil.rmtree(os.path.dirname(profile_image_origin_path))
+                corp_image_origin_path = os.path.join(BASE_DIR, profile.corp_image_path)
+                if os.path.isfile(corp_image_origin_path):
+                    shutil.rmtree(os.path.dirname(corp_image_origin_path))
+            except Exception as e:
+                print(e)
+            db.session.delete(profile)
+            # db.session.commit()
+        # user_obj.delete()
+        db.session.delete(user_obj)
+        db.session.commit()
         return redirect(url_for('commons.index'))
 
 

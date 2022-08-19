@@ -1,29 +1,20 @@
-{% extends "accounts/dashboard/dashboard_base.html" %}
+{% extends "base.html" %}
 {% block title %}
     Resetting
 {% endblock %}
 
-{% block dashboard_head %}
+{% block head %}
     <style>
     .profile-img {width: 3rem; height: 3rem; border-radius: 50%; object-fit: cover; margin-right: 1rem}
     </style>
-{#    <script type="text/javascript">#}
-{#        csrf_token = "{{ csrf_token() }}";#}
-{#        accounts_delete_url =  "{{ url_for('accounts.delete', _id=current_user.id) }}";#}
-{#        common_index_url = "{{ url_for('commons.index') }}";#}
-{#    </script>#}
+    <script type="text/javascript">
+        csrf_token = "{{ csrf_token() }}";
+        accounts_delete_url =  "{{ url_for('accounts.delete', _id=current_user.id) }}";
+        common_index_url = "{{ url_for('commons.index') }}";
+    </script>
 {% endblock %}
 
-{% block breadcrumb %}
-    <div class="uk-width-expand uk-flex uk-flex-right">
-        <ul class="uk-breadcrumb">
-            <li><a href="{{ url_for('accounts.dashboard') }}">마이 보드</a></li>
-            <li><span>계정 설정</span></li>
-        </ul>
-    </div>
-{% endblock %}
-
-{% block dashboard_section %}
+{% block body %}
     {% if current_user.is_authenticated and profile %}
         <img class="profile-img" src="/{{ profile.image_path }}" alt="">{{ profile.nickname }}
     {% endif %}
@@ -39,11 +30,11 @@
             </p>
 {#            <p><a href="#">비밀번호 재설정(로그인상태)</a></p>#}
                 <p><a href="{{ url_for('accounts.password_update', _id=current_user.id) }}">비밀번호 재설정(로그인상태)</a></p>
-{#            <form method="post">#}
-{#                <input type="hidden" name="_id" id="_id" value="{{ current_user.id }}">#}
-{#                <button type="button" class="btn" id="accounts-del">탈퇴</button>#}
-{#            </form>#}
-{#            <script src="{{ url_for('static', filename='statics/js/accounts/userDelete.js') }}"></script>#}
+        <form method="post">
+                    <input type="hidden" name="_id" id="_id" value="{{ current_user.id }}">
+                    <button type="button" class="btn" id="accounts-del">탈퇴</button>
+                </form>
+                <script src="{{ url_for('static', filename='statics/js/accounts/userDelete.js') }}"></script>
         {% else %}
 {#            <p><a href="#">비밀번호 재설정(비로그인상태:비밀번호를 잊으셨나요?)</a>#}
                 <p><a href="{{ url_for('accounts.forget_password_email') }}">비밀번호 재설정(비로그인상태:비밀번호를 잊으셨나요?)</a>

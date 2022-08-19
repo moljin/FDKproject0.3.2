@@ -1,0 +1,21 @@
+.sign-section {padding: 15px}
+.sign-section .form-container {max-width: 500px; border: solid 1px #ced6e0; border-radius: 5px; padding: 2rem; margin: 2rem auto}
+.sign-section .uk-margin input {border-radius: 5px}
+.sign-section .uk-margin textarea {border-radius: 5px; height: 5rem; resize: none}
+
+.sign-section .profile-img img.img-preview {display: none}
+.sign-section .profile-img img.img-preview.active {display: block}
+.sign-section .profile-img.get-image img.img-preview {display: block}
+
+.sign-section .corp-img img.img-preview {display: none}
+.sign-section .corp-img img.img-preview.active {display: block}
+.sign-section .corp-img.get-image img.img-preview {display: block}
+
+.sign-section .uk-button {border-radius: 5px}
+
+.sign-section  .uk-button.uk-button-default.custom-button-default {position: absolute; top: 5px; width: 101px; border: solid 1px #5f27cd; padding-left: 5px; padding-right: 5px}
+.sign-section  .uk-button.uk-button-default.custom-button-default:hover {border: solid 1px #7d5fff;}
+.sign-section  .uk-button.uk-button-default.custom-button-green {position: absolute; top: 5px; width: 101px; border: solid 1px #006400; padding-left: 5px; padding-right: 5px}
+.sign-section  .uk-button.uk-button-default.custom-button-green:hover {border: solid 1px #008000;}
+
+.section-full-container .img-container.cover-img img {width: 100%; height: 500px; object-fit: cover}

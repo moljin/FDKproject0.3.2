@@ -67,8 +67,10 @@ def update(_id):
     profile = db.session.query(Profile).filter_by(id=_id).one()
     if request.method == 'POST':
         if profile:
-            profile.nickname = form.nickname.data
-            profile.message = form.message.data
+            print("1: ", form.data.get("message"))
+            print("2: ",request.form.get("message"))
+            profile.nickname = form.data.get("nickname")
+            profile.message = form.data.get("message")
             # profile_image = form.data.get('profile_image')
             profile_image = request.files.get('profile_image')
             if profile_image:
@@ -79,8 +81,8 @@ def update(_id):
                         if os.path.isfile(profile_image_origin_path):
                             shutil.rmtree(os.path.dirname(profile_image_origin_path))
                 profile.image_path = profile_image_relative_path
-                db.session.add(profile)
-                db.session.commit()
+            db.session.add(profile)
+            db.session.commit()
             return redirect(url_for('profiles.detail', _id=_id))
     return render_template('accounts/profiles/profile_update.html', form=form, getprofile=profile)
 
@@ -88,11 +90,8 @@ def update(_id):
 @profiles_bp.route('profile/vendor/detail/<int:_id>', methods=['GET'])
 @login_required
 def vendor_detail(_id):
-    # board = TestBoard.query.get_or_404(_id)
     profile_obj = db.session.query(Profile).filter_by(id=_id).first()
-    user_id = profile_obj.user_id
-    user_obj = User.query.get_or_404(user_id)
-    return render_template('accounts/profiles/vendor_detail.html', profile_user=user_obj, profile=profile_obj)
+    return render_template('accounts/profiles/vendor_detail.html', profile=profile_obj)
 
 
 @profiles_bp.route('profile/vendor/update/<int:_id>', methods=['GET', 'POST'])
@@ -103,8 +102,8 @@ def vendor_update(_id):
     level = profile.nickname + '[' + profile.level + ']' + ':vendor-register'
     if request.method == 'POST':
         if profile:
-            profile.nickname = form.nickname.data
-            profile.message = form.message.data
+            profile.nickname = form.data.get("nickname")
+            profile.message = form.data.get("message")
             req_level = request.form.get('level')
             if req_level == level:
                 profile.level = LEVELS[1]
@@ -119,8 +118,8 @@ def vendor_update(_id):
                             shutil.rmtree(os.path.dirname(profile_image_origin_path))
                 profile.image_path = profile_image_relative_path
 
-            profile.corp_email = form.corp_email.data
-            profile.corp_number = form.corp_number.data
+            profile.corp_email = form.data.get("corp_email")
+            profile.corp_number = form.data.get("corp_number")
 
             corp_image = request.files.get('corp_image')
             if corp_image:
@@ -132,9 +131,9 @@ def vendor_update(_id):
                             shutil.rmtree(os.path.dirname(corp_image_origin_path))
                 profile.corp_image_path = corp_image_relative_path
 
-            profile.corp_address = form.corp_address.data
-            profile.main_phonenumber = form.main_phonenumber.data
-            profile.main_cellphone = form.main_cellphone.data
+            profile.corp_address = form.data.get("corp_address")
+            profile.main_phonenumber = form.data.get("main_phonenumber")
+            profile.main_cellphone = form.data.get("main_cellphone")
             db.session.add(profile)
             db.session.commit()
 
@@ -151,16 +150,23 @@ def vendor_update(_id):
 @profiles_bp.route('/profile/delete/<int:_id>', methods=['GET', 'POST'])
 @profile_ownership_required
 def delete(_id):
+    """image_path and corp_image_path 둘다 삭제해야 한다."""
     profile = db.session.query(Profile).filter_by(id=_id).one()
+    user = db.session.query(User).filter_by(id=profile.user_id).one()
     if request.method == 'POST':
         if profile:
             try:
-                os.unlink(profile.image_path)
+                profile_image_origin_path = os.path.join(BASE_DIR, profile.image_path)
+                if os.path.isfile(profile_image_origin_path):
+                    shutil.rmtree(os.path.dirname(profile_image_origin_path))
+                corp_image_origin_path = os.path.join(BASE_DIR, profile.corp_image_path)
+                if os.path.isfile(corp_image_origin_path):
+                    shutil.rmtree(os.path.dirname(corp_image_origin_path))
             except Exception as e:
                 print(e)
             db.session.delete(profile)
             db.session.commit()
-            return redirect(url_for('accounts.resetting'))
+            return redirect(url_for('accounts.resetting', _id=user.id))
         abort(404)
 
     return render_template('accounts/profiles/profile_delete.html', profile=profile)

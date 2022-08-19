@@ -4,17 +4,19 @@
     Index
 {% endblock %}
 
-{% block head %}
+{% block head_css %}
     <style>
         .lt {width: 50%; padding-right: 1rem}
         .rt {width: 50%; padding-right: 1rem}
     </style>
 {% endblock %}
 
-
 {% block content %}
-    <section class="section-container" style="display: flex">
+    {% include 'includes/messages.html' %}
+    <div contenteditable="true" style="border: solid 1px grey">
 
+        </div>
+    <section class="section-container" style="display: flex">
         <div class="rt">
             <h3>머라도</h3>
             <a href="https://www.youtube.com/playlist?list=PLXmMXHVSvS-CoYS177-UvMAQYRfL3fBtX" target="_blank">[동영상] Flask Tutorials by Pretty Printed</a><br>

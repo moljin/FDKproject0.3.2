@@ -1,4 +1,5 @@
-html, body, div, span, applet, object,
+html {font-size: 1.08rem; font-weight: 400; color: #2f3640}
+body, div, span, applet, object,
 /*iframe,*/
 h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, acronym, address, big, cite, code,
 del, dfn, em,
@@ -33,15 +34,31 @@ footer, header, hgroup, menu, nav, section {
 
 hr {background-color: grey; height: 1px}
 
-a {text-decoration: none}
+.mt-5 {margin-top: 5px}
+.mt-10 {margin-top: 10px}
+.mt-15 {margin-top: 15px}
+.mt-20 {margin-top: 20px}
+.mb-5 {margin-bottom: 5px}
+.mb-10 {margin-bottom: 10px}
+.mb-15 {margin-bottom: 15px}
+.mb-20 {margin-bottom: 20px}
+.mr-5 {margin-right: 5px}
+.mr-10 {margin-right: 10px}
+.mr-15 {margin-right: 15px}
+.mr-20 {margin-right: 20px}
+.ml-5 {margin-left: 5px}
+.ml-10 {margin-left: 10px}
+.ml-15 {margin-left: 15px}
+.ml-20 {margin-left: 20px}
 
-.header {display:flex; justify-content:space-between; align-items: center; background: rgba(16,6,89,1); height: 55px; color: white}
-.header .logo-wrapper {padding-left: 1rem; padding-bottom: 10px}
-.header .logo-wrapper .logo {font-size: 30px; font-weight: bolder; color: white; }
+.above_main {padding-top: 55px}
 
-.body-container {max-width: 1280px; padding-top: 60px; margin: auto;}
+main {max-width: 1280px; padding-top: 10px; margin: auto;}
+.section-container {padding: 15px}
+.flashes {display: flex; align-items: center; margin-bottom: 20px; width: 100%; min-height: 45px; border-radius: 5px; background: #c56cf0; color: white}
+.flashes .uk-alert-close {top: 16px}
 
-.footer {
+footer {
     background-color: rgba(13,37,141,0.84);
     text-align: center;
     width: 100%;
@@ -49,8 +66,8 @@ a {text-decoration: none}
     color: #ededef;
     padding-top: 1.8rem;
 }
-.footer .upper {font-size: 23px;}
-.footer .lower {
+footer .upper {font-size: 23px;}
+footer .lower {
     justify-content: center;
     display: flex;
     margin: 1rem auto;
@@ -58,4 +75,4 @@ a {text-decoration: none}
     padding-bottom: 1.8rem;
     font-size: 18px;
 }
-.footer .lower .footer-item {margin-right: 0.3rem;}
+footer .lower .footer-item {margin-right: 0.3rem;}
