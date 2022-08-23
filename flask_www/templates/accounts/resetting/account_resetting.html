@@ -3,16 +3,15 @@
     Resetting
 {% endblock %}
 
-{% block dashboard_head %}
-    <style>
-    .profile-img {width: 3rem; height: 3rem; border-radius: 50%; object-fit: cover; margin-right: 1rem}
-    </style>
-{#    <script type="text/javascript">#}
+{% block head_account %}
+    <link href="{{ url_for('static', filename='statics/css/account.css') }}" rel="stylesheet">
+    {#    <script type="text/javascript">#}
 {#        csrf_token = "{{ csrf_token() }}";#}
 {#        accounts_delete_url =  "{{ url_for('accounts.delete', _id=current_user.id) }}";#}
 {#        common_index_url = "{{ url_for('commons.index') }}";#}
 {#    </script>#}
 {% endblock %}
+
 
 {% block breadcrumb %}
     <div class="uk-width-expand uk-flex uk-flex-right">
@@ -27,6 +26,7 @@
     {% if current_user.is_authenticated and profile %}
         <img class="profile-img" src="/{{ profile.image_path }}" alt="">{{ profile.nickname }}
     {% endif %}
+
         <h1>Account Resetting</h1>
         <p>user.email: {{ user.email }}</p>
         <p>profile.nickname: {{ profile.nickname }}</p>

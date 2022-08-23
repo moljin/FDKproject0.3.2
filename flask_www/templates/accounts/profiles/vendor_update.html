@@ -7,6 +7,19 @@
     <link href="{{ url_for('static', filename='statics/css/account.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% block head_js %}
+    {% if getprofile.image_path %}
+        <script>
+            profileImagePath = "{{ getprofile.image_path }}"
+        </script>
+    {% endif %}
+    {% if getprofile.corp_image_path %}
+        <script>
+            corpImagePath = "{{ getprofile.corp_image_path }}"
+        </script>
+    {% endif %}
+{% endblock %}
+
 {% block breadcrumb %}
     <div class="uk-width-expand uk-flex uk-flex-right">
         <ul class="uk-breadcrumb">

@@ -34,6 +34,10 @@ class Config(object):
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+    # 파일 업로드 용량 제한 단위:바이트 16MB
+    # (cf. 20MB: 20 * 1024 * 1024)
+    # nginx.conf 파일에서도 조정한다.
 
     MAIL_SERVER = "smtp.gmail.com"
     MAIL_PORT = 465  # 587 : 이거는 장고

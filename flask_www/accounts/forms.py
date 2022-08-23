@@ -40,3 +40,12 @@ class VendorForm(ProfileForm):
     corp_address = StringField("사업자 주소", validators=[DataRequired()], render_kw={"placeholder": "사업자 주소"})
     main_phonenumber = StringField("대표 전화번호", validators=[DataRequired()], render_kw={"placeholder": "대표 전화번호"})
     main_cellphone = StringField("사업자 휴대폰", validators=[DataRequired()], render_kw={"placeholder": "사업자 휴대폰"})
+
+
+class VendorAjaxForm(ProfileForm):
+    corp_email = StringField("사업자용 이메일", validators=[DataRequired(), Length(min=5, max=120)], render_kw={"placeholder": "사업자용 이메일"})
+    corp_number = StringField("사업자 등록번호", validators=[DataRequired()], render_kw={"placeholder": "사업자 등록번호"})
+    corp_image = FileField("사업자 등록증", validators=[DataRequired()], render_kw={"placeholder": "사업자 등록증"})
+    corp_address = StringField("사업자 주소", validators=[DataRequired()], render_kw={"placeholder": "사업자 주소"})
+    main_phonenumber = StringField("대표 전화번호", validators=[DataRequired()], render_kw={"placeholder": "대표 전화번호"})
+    main_cellphone = StringField("사업자 휴대폰", validators=[DataRequired()], render_kw={"placeholder": "사업자 휴대폰"})

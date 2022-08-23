@@ -49,3 +49,17 @@ class Profile(BaseModel):
 
     def __repr__(self):
         return f"<Profile('{self.id}', '{self.nickname}')>"
+
+
+class ProfileCoverImage(BaseModel):
+    __tablename__ = 'profile_cover_images'
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    user = db.relationship('User', backref=db.backref('profile_cover_image_user_set'))
+
+    profile_id = db.Column(db.Integer)
+    profile = db.relationship('Profile', backref=db.backref('profile_profile_cover_image_set', cascade='all, delete-orphan'),
+                              primaryjoin='foreign(ProfileCoverImage.profile_id) == remote(Profile.id)')
+
+    image_1_path = db.Column(db.String(200), nullable=True)
+    image_2_path = db.Column(db.String(200), nullable=True)
+    image_3_path = db.Column(db.String(200), nullable=True)

@@ -1,8 +1,9 @@
 import os
 import re
 import unicodedata
+import uuid
 
-from flask import g, request, abort, flash
+from flask import g, request, abort, flash, session
 
 from flask_www.configs import db
 from flask_www.configs.config import NOW, BASE_DIR
@@ -117,3 +118,11 @@ def file_to_base64_src(file_path, file_name):
         base64_src = "data:image/" + _format + ";base64," + base64_string
 
     return base64_src
+
+
+def ajax_post_key():
+    if 'ajax_post_key' in session:
+        session['ajax_post_key'] = session.get('ajax_post_key')
+    else:
+        session["ajax_post_key"] = str(uuid.uuid4())
+    return session['ajax_post_key']
